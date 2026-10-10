@@ -6,13 +6,13 @@ Software que lê um PDF, armazena seus trechos como vetores no PostgreSQL com pg
 - **Busca** (`src/search.py`): vetoriza a pergunta, busca os 10 trechos mais relevantes (`k=10`), monta o prompt e chama a LLM.
 - **Chat** (`src/chat.py`): CLI interativa de perguntas e respostas.
 
-Funciona com **OpenAI** ou **Google Gemini**, escolhidos pela variável `LLM_PROVIDER`.
+Funciona com **OpenRouter** (padrão), **OpenAI** ou **Google Gemini**, escolhidos pela variável `LLM_PROVIDER`.
 
 ## Pré-requisitos
 
 - Python 3.12 ou superior (testado no 3.14)
 - Docker com Docker Compose
-- Uma API key da [OpenAI](https://platform.openai.com/api-keys) **ou** do [Google AI Studio](https://aistudio.google.com/apikey)
+- Uma API key da [OpenRouter](https://openrouter.ai/keys) (padrão), da [OpenAI](https://platform.openai.com/api-keys) **ou** do [Google AI Studio](https://aistudio.google.com/apikey)
 
 ## Como executar
 
@@ -35,7 +35,7 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Abra o `.env` e preencha a API key do provedor escolhido (`OPENAI_API_KEY` ou `GOOGLE_API_KEY`). O `.env` está no `.gitignore` e nunca deve ser commitado.
+Abra o `.env` e preencha a API key do provedor escolhido: `OPENROUTER_API_KEY` (padrão), `OPENAI_API_KEY` ou `GOOGLE_API_KEY`. O `.env` está no `.gitignore` e nunca deve ser commitado.
 
 ### 4. Subir o banco de dados
 
@@ -95,7 +95,10 @@ Para encerrar o chat, digite `sair`, `exit` ou `quit`, ou pressione `Ctrl+C` / `
 
 | Variável | Padrão no `.env.example` | Para que serve |
 | --- | --- | --- |
-| `LLM_PROVIDER` | `openai` | Provedor de embeddings e LLM: `openai` ou `gemini`. |
+| `LLM_PROVIDER` | `openrouter` | Provedor de embeddings e LLM: `openrouter`, `openai` ou `gemini`. |
+| `OPENROUTER_API_KEY` | _(vazio)_ | API key da OpenRouter. Obrigatória quando `LLM_PROVIDER=openrouter`. |
+| `OPENROUTER_EMBEDDING_MODEL` | `openai/text-embedding-3-small` | Modelo de embeddings usado via OpenRouter. |
+| `OPENROUTER_LLM_MODEL` | `openai/gpt-6-luna` | Modelo de chat usado via OpenRouter para gerar a resposta. |
 | `OPENAI_API_KEY` | _(vazio)_ | API key da OpenAI. Obrigatória quando `LLM_PROVIDER=openai`. |
 | `OPENAI_EMBEDDING_MODEL` | `text-embedding-3-small` | Modelo de embeddings da OpenAI. |
 | `OPENAI_LLM_MODEL` | `gpt-6-luna` | Modelo de chat da OpenAI que gera a resposta. |
@@ -106,14 +109,15 @@ Para encerrar o chat, digite `sair`, `exit` ou `quit`, ou pressione `Ctrl+C` / `
 | `PG_VECTOR_COLLECTION_NAME` | `documents` | Nome da collection onde os vetores são gravados. |
 | `PDF_PATH` | `document.pdf` | Caminho do PDF a ingerir (relativo à raiz do projeto ou absoluto). |
 
-### Alternando entre OpenAI e Gemini
+### Alternando entre OpenRouter, OpenAI e Gemini
 
-Basta mudar `LLM_PROVIDER` no `.env` e preencher a API key correspondente. Somente a key do provedor selecionado é exigida.
+Basta mudar `LLM_PROVIDER` no `.env` (`openrouter`, `openai` ou `gemini`) e preencher a API key correspondente. A OpenRouter é acessada pela API compatível com a OpenAI em `https://openrouter.ai/api/v1`, tanto para embeddings quanto para o chat; qualquer modelo do catálogo dela pode ser usado nas variáveis `OPENROUTER_*`. Somente a key do provedor selecionado é exigida.
 
 ### Modelos padrão
 
 Os padrões são os modelos mais leves e baratos de cada provedor, conferidos na documentação oficial em outubro de 2026:
 
+- **OpenRouter:** `openai/text-embedding-3-small` (embeddings, 1536 dimensões) e `openai/gpt-6-luna` (chat).
 - **OpenAI:** `text-embedding-3-small` (embeddings, 1536 dimensões) e `gpt-6-luna` (chat).
 - **Gemini:** `gemini-embedding-001` (embeddings, 3072 dimensões) e `gemini-3.1-flash-lite` (chat, com camada gratuita).
 
@@ -146,7 +150,7 @@ python src/ingest.py
 
 ## Mensagens de erro comuns
 
-- `Variável OPENAI_API_KEY não definida.` — preencha a key no `.env` (ou `GOOGLE_API_KEY` se usar Gemini).
+- `Variável OPENROUTER_API_KEY não definida.` — preencha a key do provedor escolhido no `.env` (`OPENROUTER_API_KEY`, `OPENAI_API_KEY` ou `GOOGLE_API_KEY`).
 - `Não foi possível conectar ao banco de dados. Verifique se ele está em execução com: docker compose up -d` — o Postgres não está rodando.
 - `Arquivo PDF não encontrado: ...` — confira o `PDF_PATH`.
 
@@ -159,7 +163,7 @@ python src/ingest.py
 ├── pytest.ini            # Configuração dos testes
 ├── src/
 │   ├── config.py         # Leitura e validação do .env
-│   ├── providers.py      # Embeddings, LLM e vector store (OpenAI ou Gemini)
+│   ├── providers.py      # Embeddings, LLM e vector store (OpenRouter, OpenAI ou Gemini)
 │   ├── ingest.py         # Script de ingestão do PDF
 │   ├── search.py         # Busca semântica e chamada à LLM
 │   └── chat.py           # CLI para interação com o usuário

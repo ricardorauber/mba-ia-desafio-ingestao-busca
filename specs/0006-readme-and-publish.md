@@ -17,10 +17,10 @@ Document how to run the project and publish it as a public fork on the user's pe
 
 ## Acceptance criteria
 - [ ] AC1: Following the README step by step on a clean machine runs ingestion and the chat. (R1)
-- [ ] AC2: Every variable in `.env.example` appears in the README with its purpose. (R2)
+- [x] AC2: Every variable in `.env.example` appears in the README with its purpose. (R2)
 - [x] AC3: The README has a section on switching embeddings models. (R3)
 - [x] AC4: The README has a sample session and the exit commands. (R4)
-- [ ] AC5: `https://github.com/ricardorauber/mba-ia-desafio-ingestao-busca` is public, is a fork of the template, and its default branch contains the final code. (R5)
+- [x] AC5: `https://github.com/ricardorauber/mba-ia-desafio-ingestao-busca` is public, is a fork of the template, and its default branch contains the final code. (R5)
 - [x] AC6: `git ls-files` does not list `.env`. (R6)
 
 ## Unit tests
