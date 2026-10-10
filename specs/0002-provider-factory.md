@@ -15,11 +15,11 @@ Build the embeddings model, the chat model and the PGVector store from the setti
 - R5: `get_vector_store` SHALL accept a `pre_delete_collection` flag (default `False`) and pass it to `PGVector`.
 
 ## Acceptance criteria
-- [ ] AC1: OpenAI settings yield an `OpenAIEmbeddings` whose model equals `OPENAI_EMBEDDING_MODEL`. (R1)
-- [ ] AC2: Gemini settings yield a `GoogleGenerativeAIEmbeddings` whose model equals `GOOGLE_EMBEDDING_MODEL`. (R2)
-- [ ] AC3: OpenAI settings yield a `ChatOpenAI` with `OPENAI_LLM_MODEL`; Gemini settings yield a `ChatGoogleGenerativeAI` with `GOOGLE_LLM_MODEL`. (R3)
-- [ ] AC4: `PGVector` is constructed with the configured connection, collection name, embeddings and `use_jsonb=True`. (R4)
-- [ ] AC5: `pre_delete_collection=True` reaches the `PGVector` constructor; omitted, it is `False`. (R5)
+- [x] AC1: OpenAI settings yield an `OpenAIEmbeddings` whose model equals `OPENAI_EMBEDDING_MODEL`. (R1)
+- [x] AC2: Gemini settings yield a `GoogleGenerativeAIEmbeddings` whose model equals `GOOGLE_EMBEDDING_MODEL`. (R2)
+- [x] AC3: OpenAI settings yield a `ChatOpenAI` with `OPENAI_LLM_MODEL`; Gemini settings yield a `ChatGoogleGenerativeAI` with `GOOGLE_LLM_MODEL`. (R3)
+- [x] AC4: `PGVector` is constructed with the configured connection, collection name, embeddings and `use_jsonb=True`. (R4)
+- [x] AC5: `pre_delete_collection=True` reaches the `PGVector` constructor; omitted, it is `False`. (R5)
 
 ## Unit tests
 - T1: OpenAI embeddings class and model name (AC1) — no network call.
