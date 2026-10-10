@@ -17,14 +17,14 @@ Give the project up-to-date dependencies, a complete environment template, and o
 - R7: The system SHALL never print or log API key values.
 
 ## Acceptance criteria
-- [ ] AC1: `pip install -r requirements.txt` succeeds in a fresh Python 3.14 venv. (R1)
-- [ ] AC2: `.env.example` contains exactly the variables and defaults listed in R2, with empty key values. (R2)
-- [ ] AC3: With a valid environment, `load_settings()` returns an object whose fields match the environment and cannot be reassigned. (R3)
-- [ ] AC4: `LLM_PROVIDER=anthropic` raises `ConfigError` mentioning `LLM_PROVIDER`, `openai` and `gemini`. (R4)
-- [ ] AC5: `LLM_PROVIDER=gemini` with blank `GOOGLE_API_KEY` raises `ConfigError` mentioning `GOOGLE_API_KEY`; `OPENAI_API_KEY` is not required in that case. (R5)
-- [ ] AC6: Blank `DATABASE_URL` raises `ConfigError` mentioning `DATABASE_URL`. (R6)
-- [ ] AC7: No `ConfigError` message and no `repr()` of the settings object contains an API key value. (R7)
-- [ ] AC8: `pytest` runs from the repository root and discovers `tests/`. (R1)
+- [x] AC1: `pip install -r requirements.txt` succeeds in a fresh Python 3.14 venv. (R1)
+- [x] AC2: `.env.example` contains exactly the variables and defaults listed in R2, with empty key values. (R2)
+- [x] AC3: With a valid environment, `load_settings()` returns an object whose fields match the environment and cannot be reassigned. (R3)
+- [x] AC4: `LLM_PROVIDER=anthropic` raises `ConfigError` mentioning `LLM_PROVIDER`, `openai` and `gemini`. (R4)
+- [x] AC5: `LLM_PROVIDER=gemini` with blank `GOOGLE_API_KEY` raises `ConfigError` mentioning `GOOGLE_API_KEY`; `OPENAI_API_KEY` is not required in that case. (R5)
+- [x] AC6: Blank `DATABASE_URL` raises `ConfigError` mentioning `DATABASE_URL`. (R6)
+- [x] AC7: No `ConfigError` message and no `repr()` of the settings object contains an API key value. (R7)
+- [x] AC8: `pytest` runs from the repository root and discovers `tests/`. (R1)
 
 ## Unit tests
 - T1: valid OpenAI environment returns settings with the expected field values (AC3).
