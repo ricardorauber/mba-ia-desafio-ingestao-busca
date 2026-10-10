@@ -17,13 +17,13 @@ Let the user ask questions in the terminal and read the answers, in the format s
 - R7: WHEN `ask` raises during a question, the system SHALL print `RESPOSTA: Erro ao processar a pergunta: <short reason>` and keep the chat running.
 
 ## Acceptance criteria
-- [ ] AC1: Initialization failure prints the fixed message and exits 1. (R1)
-- [ ] AC2: Start-up output shows `Faça sua pergunta:` and the exit hint. (R2)
-- [ ] AC3: Typing a question prints `RESPOSTA: ` plus the answer. (R3)
-- [ ] AC4: Pressing Enter on an empty line asks again without calling `ask`. (R4)
-- [ ] AC5: `SAIR`, `exit` and ` quit ` all end the chat with `Até logo!`. (R5)
-- [ ] AC6: Ctrl+C and Ctrl+D end the chat with `Até logo!` and no traceback. (R6)
-- [ ] AC7: An exception in `ask` is reported and the next question is still accepted. (R7)
+- [x] AC1: Initialization failure prints the fixed message and exits 1. (R1)
+- [x] AC2: Start-up output shows `Faça sua pergunta:` and the exit hint. (R2)
+- [x] AC3: Typing a question prints `RESPOSTA: ` plus the answer. (R3)
+- [x] AC4: Pressing Enter on an empty line asks again without calling `ask`. (R4)
+- [x] AC5: `SAIR`, `exit` and ` quit ` all end the chat with `Até logo!`. (R5)
+- [x] AC6: Ctrl+C and Ctrl+D end the chat with `Até logo!` and no traceback. (R6)
+- [x] AC7: An exception in `ask` is reported and the next question is still accepted. (R7)
 
 ## Unit tests
 - T1: scripted inputs `["Pergunta 1", "sair"]` with fake `ask` → output contains `RESPOSTA: <fake answer>` and `Até logo!` (AC3, AC5).
