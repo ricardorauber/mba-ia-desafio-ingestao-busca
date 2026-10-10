@@ -7,9 +7,11 @@ from dotenv import load_dotenv
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 
-PROVIDERS = ("openai", "gemini")
+PROVIDERS = ("openai", "gemini", "openrouter")
 
 DEFAULTS = {
+    "OPENROUTER_EMBEDDING_MODEL": "openai/text-embedding-3-small",
+    "OPENROUTER_LLM_MODEL": "openai/gpt-6-luna",
     "OPENAI_EMBEDDING_MODEL": "text-embedding-3-small",
     "OPENAI_LLM_MODEL": "gpt-6-luna",
     "GOOGLE_EMBEDDING_MODEL": "models/gemini-embedding-001",
@@ -20,6 +22,7 @@ DEFAULTS = {
 API_KEY_VARIABLES = {
     "openai": "OPENAI_API_KEY",
     "gemini": "GOOGLE_API_KEY",
+    "openrouter": "OPENROUTER_API_KEY",
 }
 
 
@@ -30,6 +33,9 @@ class ConfigError(Exception):
 @dataclass(frozen=True)
 class Settings:
     llm_provider: str
+    openrouter_api_key: str = field(repr=False)
+    openrouter_embedding_model: str
+    openrouter_llm_model: str
     openai_api_key: str = field(repr=False)
     openai_embedding_model: str
     openai_llm_model: str
@@ -72,13 +78,16 @@ def load_settings(environ: Mapping[str, str] | None = None) -> Settings:
 
     provider = _read(environ, "LLM_PROVIDER").lower()
     if provider not in PROVIDERS:
-        allowed = " ou ".join(PROVIDERS)
+        allowed = ", ".join(PROVIDERS[:-1]) + " ou " + PROVIDERS[-1]
         raise ConfigError(f"Variável LLM_PROVIDER inválida. Valores permitidos: {allowed}.")
 
     _require(environ, API_KEY_VARIABLES[provider])
 
     return Settings(
         llm_provider=provider,
+        openrouter_api_key=_read(environ, "OPENROUTER_API_KEY"),
+        openrouter_embedding_model=_read(environ, "OPENROUTER_EMBEDDING_MODEL"),
+        openrouter_llm_model=_read(environ, "OPENROUTER_LLM_MODEL"),
         openai_api_key=_read(environ, "OPENAI_API_KEY"),
         openai_embedding_model=_read(environ, "OPENAI_EMBEDDING_MODEL"),
         openai_llm_model=_read(environ, "OPENAI_LLM_MODEL"),

@@ -6,6 +6,9 @@ from config import load_settings
 def build_settings(**overrides):
     env = {
         "LLM_PROVIDER": "openai",
+        "OPENROUTER_API_KEY": "sk-or-test",
+        "OPENROUTER_EMBEDDING_MODEL": "openai/text-embedding-3-small",
+        "OPENROUTER_LLM_MODEL": "openai/gpt-6-luna",
         "OPENAI_API_KEY": "sk-test-openai",
         "OPENAI_EMBEDDING_MODEL": "text-embedding-3-small",
         "OPENAI_LLM_MODEL": "gpt-6-luna",
