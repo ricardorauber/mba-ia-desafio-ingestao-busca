@@ -17,14 +17,14 @@ Answer a question using only the 10 most similar chunks from the vector store an
 - R7: WHEN the collection has no documents, `ask` SHALL return `Não tenho informações necessárias para responder sua pergunta.` without calling the LLM.
 
 ## Acceptance criteria
-- [ ] AC1: `PROMPT_TEMPLATE` is byte-identical to the template repository version. (R1)
-- [ ] AC2: `ask` calls `similarity_search_with_score` with `k=10`. (R2)
-- [ ] AC3: The prompt sent to the LLM contains every retrieved chunk in order, separated by blank lines, and the user question. (R3, R4)
+- [x] AC1: `PROMPT_TEMPLATE` is byte-identical to the template repository version. (R1)
+- [x] AC2: `ask` calls `similarity_search_with_score` with `k=10`. (R2)
+- [x] AC3: The prompt sent to the LLM contains every retrieved chunk in order, separated by blank lines, and the user question. (R3, R4)
 - [ ] AC4: With `document.pdf` ingested, asking for the revenue of a company listed in the PDF returns the value from the PDF. (R4)
 - [ ] AC5: With `document.pdf` ingested, `Qual é a capital da França?` returns `Não tenho informações necessárias para responder sua pergunta.` (R4)
-- [ ] AC6: Two calls to `ask` construct the LLM and vector store once. (R5)
-- [ ] AC7: Missing API key → `search_prompt()` prints a message and returns `None`. (R6)
-- [ ] AC8: Empty search result returns the fixed fallback and the LLM is not invoked. (R7)
+- [x] AC6: Two calls to `ask` construct the LLM and vector store once. (R5)
+- [x] AC7: Missing API key → `search_prompt()` prints a message and returns `None`. (R6)
+- [x] AC8: Empty search result returns the fixed fallback and the LLM is not invoked. (R7)
 
 ## Unit tests
 - T1: `build_context` joins three documents in order with blank lines (AC3).
