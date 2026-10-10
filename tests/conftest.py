@@ -31,3 +31,8 @@ def openai_settings():
 @pytest.fixture
 def gemini_settings():
     return build_settings(LLM_PROVIDER="gemini")
+
+
+@pytest.fixture
+def openrouter_settings():
+    return build_settings(LLM_PROVIDER="openrouter")

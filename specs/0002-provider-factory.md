@@ -22,8 +22,8 @@ Build the embeddings model, the chat model and the PGVector store from the setti
 - [x] AC3: OpenAI settings yield a `ChatOpenAI` with `OPENAI_LLM_MODEL`; Gemini settings yield a `ChatGoogleGenerativeAI` with `GOOGLE_LLM_MODEL`. (R3)
 - [x] AC4: `PGVector` is constructed with the configured connection, collection name, embeddings and `use_jsonb=True`. (R4)
 - [x] AC5: `pre_delete_collection=True` reaches the `PGVector` constructor; omitted, it is `False`. (R5)
-- [ ] AC6: OpenRouter settings yield an `OpenAIEmbeddings` whose model equals `OPENROUTER_EMBEDDING_MODEL`, whose base URL is `https://openrouter.ai/api/v1` and that does not tokenize input client-side. (R6)
-- [ ] AC7: OpenRouter settings yield a `ChatOpenAI` whose model equals `OPENROUTER_LLM_MODEL` and whose base URL is `https://openrouter.ai/api/v1`. (R7)
+- [x] AC6: OpenRouter settings yield an `OpenAIEmbeddings` whose model equals `OPENROUTER_EMBEDDING_MODEL`, whose base URL is `https://openrouter.ai/api/v1` and that does not tokenize input client-side. (R6)
+- [x] AC7: OpenRouter settings yield a `ChatOpenAI` whose model equals `OPENROUTER_LLM_MODEL` and whose base URL is `https://openrouter.ai/api/v1`. (R7)
 
 ## Unit tests
 - T1: OpenAI embeddings class and model name (AC1) — no network call.

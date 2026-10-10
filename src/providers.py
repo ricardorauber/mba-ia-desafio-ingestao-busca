@@ -8,6 +8,8 @@ from sqlalchemy.exc import OperationalError as SQLAlchemyOperationalError
 
 from config import Settings
 
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+
 DATABASE_ERRORS = (SQLAlchemyOperationalError, PsycopgOperationalError)
 
 DATABASE_UNAVAILABLE_MESSAGE = (
@@ -31,6 +33,13 @@ def is_database_unavailable(error: BaseException) -> bool:
 
 
 def get_embeddings(settings: Settings) -> Embeddings:
+    if settings.llm_provider == "openrouter":
+        return OpenAIEmbeddings(
+            model=settings.openrouter_embedding_model,
+            api_key=settings.openrouter_api_key,
+            base_url=OPENROUTER_BASE_URL,
+            check_embedding_ctx_length=False,
+        )
     if settings.llm_provider == "gemini":
         return GoogleGenerativeAIEmbeddings(
             model=settings.google_embedding_model,
@@ -43,6 +52,12 @@ def get_embeddings(settings: Settings) -> Embeddings:
 
 
 def get_llm(settings: Settings) -> BaseChatModel:
+    if settings.llm_provider == "openrouter":
+        return ChatOpenAI(
+            model=settings.openrouter_llm_model,
+            api_key=settings.openrouter_api_key,
+            base_url=OPENROUTER_BASE_URL,
+        )
     if settings.llm_provider == "gemini":
         return ChatGoogleGenerativeAI(
             model=settings.google_llm_model,

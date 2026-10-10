@@ -51,3 +51,20 @@ def test_pre_delete_collection_is_forwarded(openai_settings):
         providers.get_vector_store(openai_settings, object(), pre_delete_collection=True)
 
     assert pgvector.call_args.kwargs["pre_delete_collection"] is True
+
+
+def test_openrouter_embeddings(openrouter_settings):
+    embeddings = providers.get_embeddings(openrouter_settings)
+
+    assert isinstance(embeddings, OpenAIEmbeddings)
+    assert embeddings.model == "openai/text-embedding-3-small"
+    assert embeddings.openai_api_base == "https://openrouter.ai/api/v1"
+    assert embeddings.check_embedding_ctx_length is False
+
+
+def test_openrouter_chat_model(openrouter_settings):
+    llm = providers.get_llm(openrouter_settings)
+
+    assert isinstance(llm, ChatOpenAI)
+    assert llm.model_name == "openai/gpt-6-luna"
+    assert llm.openai_api_base == "https://openrouter.ai/api/v1"
