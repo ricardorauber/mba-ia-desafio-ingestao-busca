@@ -17,7 +17,7 @@ Load the PDF, split it into 1000-character chunks with 150 overlap, embed each c
 - R7: WHEN settings are invalid (`ConfigError`) or the database is unreachable, the system SHALL print a short Brazilian Portuguese message (for the database: tell the user to run `docker compose up -d`), with no stack trace, and exit with code 1.
 
 ## Acceptance criteria
-- [ ] AC1: `python src/ingest.py` with the database up stores the chunks of `document.pdf` and prints pages, chunks and collection name. (R1, R4, R5)
+- [x] AC1: `python src/ingest.py` with the database up stores the chunks of `document.pdf` and prints pages, chunks and collection name. (R1, R4, R5)
 - [x] AC2: Running it twice leaves the same number of rows in the collection as running it once. (R4)
 - [x] AC3: Every stored chunk has at most 1000 characters and consecutive chunks of the same page share overlap. (R2)
 - [x] AC4: No stored chunk is blank. (R3)

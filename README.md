@@ -79,10 +79,13 @@ Os testes unitários não precisam de banco nem de API key.
 Faça sua pergunta:
 (digite 'sair', 'exit' ou 'quit' para encerrar)
 
-PERGUNTA: Qual o faturamento da empresa Alfa Energia S.A.?
-RESPOSTA: O faturamento da Alfa Energia S.A. foi de R$ 722.875.391,46.
+PERGUNTA: Qual o faturamento da Empresa SuperTechIABrazil?
+RESPOSTA: O faturamento da SuperTechIABrazil é R$ 10.000.000,00.
 
-PERGUNTA: Qual é a capital da França?
+PERGUNTA: Em que ano foi fundada a Alfa Energia S.A.?
+RESPOSTA: 1972
+
+PERGUNTA: Quantos clientes temos em 2024?
 RESPOSTA: Não tenho informações necessárias para responder sua pergunta.
 
 PERGUNTA: sair

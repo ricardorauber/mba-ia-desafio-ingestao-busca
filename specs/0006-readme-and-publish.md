@@ -16,7 +16,7 @@ Document how to run the project and publish it as a public fork on the user's pe
 - R6: `.env` SHALL never be committed.
 
 ## Acceptance criteria
-- [ ] AC1: Following the README step by step on a clean machine runs ingestion and the chat. (R1)
+- [x] AC1: Following the README step by step on a clean machine runs ingestion and the chat. (R1)
 - [x] AC2: Every variable in `.env.example` appears in the README with its purpose. (R2)
 - [x] AC3: The README has a section on switching embeddings models. (R3)
 - [x] AC4: The README has a sample session and the exit commands. (R4)
